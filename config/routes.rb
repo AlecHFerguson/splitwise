@@ -1,5 +1,10 @@
 Splitwise::Application.routes.draw do
   resources :users
+  resources :sessions, only: [:login, :create, :destroy]
+
+  match '/login',  to: 'sessions#login',   via: 'get'
+  match '/create', to: 'sessions#create',  via: 'post'
+  match '/logout', to: 'sessions#destroy', via: 'delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

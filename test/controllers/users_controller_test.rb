@@ -1,4 +1,4 @@
-require 'test_helper'
+require '../test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
@@ -13,6 +13,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
+    assert_redirected_to user_path(assigns(:show))
     assert_response :success
   end
 
@@ -22,6 +23,12 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to user_path(assigns(:user))
+  end
+
+  test 'invalid email => redirects to user' do
+    assert_no_difference('User.count') do
+      post :create, user: { email: 'blahblah', fname: @user.fname, lname: @user.lname, password: @user.password }
+    end
   end
 
   test "should show user" do

@@ -3,7 +3,7 @@
 one:
   fname: MyString
   lname: MyString
-  email: MyString
+  email: mystring@myurl.com
   password: MyString
 
 two:
