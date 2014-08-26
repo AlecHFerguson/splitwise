@@ -1,4 +1,4 @@
-require '../test_helper'
+require '/home/alec/RailsProjects/splitwise/test/test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
@@ -13,7 +13,6 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_redirected_to user_path(assigns(:show))
     assert_response :success
   end
 
