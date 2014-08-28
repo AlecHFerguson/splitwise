@@ -76,6 +76,19 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(user.errors.messages, { email: ["is invalid"] })
   end
 
+  test 'Blank email => fails to save' do
+    user = User.new({ fname: 'Abcdefg', lname: 'Abcdefg', email: '',
+                      password: 'test'})
+    assert_not user.save
+    assert_equal(user.errors.messages, { email: ["can't be blank", "is invalid"] })
+  end
+
+  test 'Missing email => fails to save' do
+    user = User.new({ fname: 'Abcdefg', lname: 'Abcdefg', password: 'test'})
+    assert_not user.save
+    assert_equal(user.errors.messages, { email: ["can't be blank", "is invalid"] })
+  end
+
   ## :password tests
   test 'Short password => fails to save' do
     user = User.new({ fname: 'Abcdefg', lname: 'Abcdefg', email: 'a@b.c', password: 'hi'})
