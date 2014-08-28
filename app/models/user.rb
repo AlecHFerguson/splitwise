@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
+  NAME_REGEX = /\A[A-Z][a-zA-Z]+\z/
 
   before_save :encrypt_password
   after_save :clear_password
 
-  validates :fname, presence: true, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :lname, presence: true, format: { with: /\A[a-zA-Z]+\z/ }
+  validates :fname, presence: true, format: { with: NAME_REGEX }
+  validates :lname, presence: true, format: { with: NAME_REGEX }
   validates :email, presence: true, format: { with: /@/ }
   validates :password, presence: true, length: { in: 3..50 }
 
