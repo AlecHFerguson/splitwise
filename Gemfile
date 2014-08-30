@@ -5,8 +5,6 @@ gem 'rails', '4.0.0'
 
 gem 'rspec'
 
-gem 'capybara'
-
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
@@ -31,7 +29,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'bcrypt'#, :require => 'bcrypt'
+gem 'bcrypt'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -39,7 +37,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'

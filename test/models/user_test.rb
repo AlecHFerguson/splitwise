@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   injection_string = "'; Show tables;--"
 
   test 'Valid user is saved' do
-    user = User.new({ fname: 'Aaa', lname: 'Bbb', email: 'a@b.c', password: 'test'})
+    user = User.new({ fname: 'Aaa', lname: 'Bbb', email: 'a@b.c', password: 'test' })
     assert user.save
   end
 
@@ -98,8 +98,9 @@ class UserTest < ActiveSupport::TestCase
 
   test 'Long password => fails to save' do
     user = User.new({ fname: 'Abcdefg', lname: 'Abcdefg', email: 'a@b.c', 
-                      password: 'bloodbloodbloodbloodbloodbloodbloodbloodbloodbloody'})
+                      password: 'LesTroisTetonsLesTroisTetonsLesTroisTetonsLesTroisTetonsLesTroisTetons999abcd'})
     assert_not user.save
     assert_equal(user.errors.messages, { password: ['is too long (maximum is 50 characters)'] })
   end
+
 end
