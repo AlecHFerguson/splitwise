@@ -13,6 +13,9 @@ class UserTest < ActiveSupport::TestCase
     user = User.new({ fname: @test_fname, lname: @test_lname, email: @test_email, 
                       password: @test_password, password_confirmation: @test_password })
     assert user.save
+
+    assert_not_nil user.remember_token
+    assert_not_equal(user.remember_token, '')
   end
 
   ## :fname tests
