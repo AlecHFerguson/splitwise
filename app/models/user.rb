@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def User.hash_remember_token(token)
+  def User.hash_token(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   private
     def create_remember_token
-      self.remember_token = User.hash_remember_token(User.gen_remember_token)
+      self.remember_token = User.hash_token(User.gen_remember_token)
     end
   
 end
