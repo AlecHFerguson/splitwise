@@ -1,6 +1,8 @@
 require '/home/alec/RailsProjects/splitwise/test/test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  include SessionsHelper
+
   setup do
     @user = users(:one)
     @test_fname = 'Abcdefg'
@@ -8,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
     @test_email = 'aaa@bbb.cc'
     @test_password = 'testing1'
 
-    post '/create', session: { email: @user.email, password: @user.password }
+    sign_in @user
   end
 
   test "should get index" do
