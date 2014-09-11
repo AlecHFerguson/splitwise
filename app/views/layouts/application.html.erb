@@ -14,5 +14,8 @@
 
     <%= yield %>
   </div>
+  <% if signed_in? %>
+    <%= link_to 'Logout', '/logout', method: :delete %>
+  <% end %>
 </body>
 </html>

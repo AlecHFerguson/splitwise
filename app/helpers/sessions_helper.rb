@@ -7,6 +7,17 @@ module SessionsHelper
     self.current_user = user
   end
 
+  def sign_out
+    token_hash = User.hash_token(cookies[:remember_token])
+    user = User.find_by(remember_token: token_hash)
+    if user
+      user.update_attribute(:remember_token, nil)
+    end
+    cookies.delete :remember_token
+    self.current_user = nil
+    render 'login'
+  end
+
   def signed_in?
     !current_user.nil?
   end
