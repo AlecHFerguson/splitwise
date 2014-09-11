@@ -12,3 +12,11 @@ two:
   lname: MyString
   email: MyString
   password: MyString
+
+authed:
+  fname: Authed
+  lname: User
+  email: authed@auth.com
+  password: testing1
+  password_digest: <%= BCrypt::Password.create('testing1') %>
+  remember_token: 123456

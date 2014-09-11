@@ -7,6 +7,8 @@ class UsersControllerTest < ActionController::TestCase
     @test_lname = 'Hijklmnop'
     @test_email = 'aaa@bbb.cc'
     @test_password = 'testing1'
+
+    post '/create', session: { email: @user.email, password: @user.password }
   end
 
   test "should get index" do
