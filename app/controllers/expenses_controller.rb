@@ -20,7 +20,7 @@ class ExpensesController < ApplicationController
         format.json { render action: 'show', status: :created, location: @expense }
       else
         format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @expense.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,6 +44,11 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
+    @expense.destroy
+    respond_to do |format|
+      format.html { redirect_to expenses_url }
+      format.json { head :no_content }
+    end
   end
 
   private

@@ -18,6 +18,9 @@
           <td><%= expense.name %></td>
           <td><%= format_dollars(expense.amount) %></td>
           <td><%= expense.description %></td>
+          <td><%= link_to 'Details', expense %></td>
+          <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
+          <td><%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
