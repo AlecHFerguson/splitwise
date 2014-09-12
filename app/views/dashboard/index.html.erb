@@ -1,0 +1,21 @@
+<% provide(:title, 'Dashboard') %>
+<h1>Expenses Dashboard</h1>
+
+
+
+<tbody>
+  <tr class="expenses-row-titles">
+    <td>Name</td>
+    <td>Amount</td>
+    <td>Description</td>
+  </tr>
+  <% if @expenses %>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= expense.name %></td>
+        <td><%= expense.amount %></td>
+        <td><%= expense.description %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
