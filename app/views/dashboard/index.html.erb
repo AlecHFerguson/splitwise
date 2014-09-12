@@ -11,7 +11,7 @@
     </tr>
   </thead>
 
-  <% if @expenses %>
+  <% if @expenses && !@expenses.empty? %>
     <tbody>
       <% @expenses.each do |expense| %>
         <tr>
