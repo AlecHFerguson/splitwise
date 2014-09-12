@@ -1,21 +1,30 @@
 <% provide(:title, 'Dashboard') %>
 <h1>Expenses Dashboard</h1>
 
+<table>
+  <thead>
+    <tr class="row-titles">
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Description</th>
+    </tr>
+  </thead>
 
-
-<tbody>
-  <tr class="expenses-row-titles">
-    <td>Name</td>
-    <td>Amount</td>
-    <td>Description</td>
-  </tr>
   <% if @expenses %>
-    <% @expenses.each do |expense| %>
-      <tr>
-        <td><%= expense.name %></td>
-        <td><%= expense.amount %></td>
-        <td><%= expense.description %></td>
-      </tr>
-    <% end %>
+    <tbody>
+      <% @expenses.each do |expense| %>
+        <tr>
+          <td><%= expense.name %></td>
+          <td><%= expense.amount %></td>
+          <td><%= expense.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <% else %>
+    </table>
+    <div><%= current_user.id %></div>
+    <div>You have no expenses recorded.  <%= link_to 'Add a new expense', new_expense_path %>.</div>
   <% end %>
-</tbody>
+  
