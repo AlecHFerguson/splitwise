@@ -15,5 +15,6 @@
   <%= @expense.description %>
 </p>
 
-<%= link_to 'Edit', edit_expense_path(@expense) %> |
+<%= link_to 'Edit', edit_expense_path(@expense) %>
+<%= link_to 'Delete', @expense, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Dashboard', {controller: :dashboard} %>
