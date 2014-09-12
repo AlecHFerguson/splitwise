@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
   include ExpensesHelper, SessionsHelper
+  before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :require_login
 
   def index
@@ -27,6 +28,18 @@ class ExpensesController < ApplicationController
   def edit
   end
 
+  def update
+    respond_to do |format|
+      if @expense.update(params_to_save)
+        format.html { redirect_to @expense, notice: 'Expense was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @expense.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def show
   end
 
@@ -34,6 +47,10 @@ class ExpensesController < ApplicationController
   end
 
   private
+    def set_expense
+      @expense = Expense.find(params[:id])
+    end
+
     def expense_params
       params.require(:expense).permit(C_NAME, C_AMOUNT, C_DESCRIPTION)
     end
