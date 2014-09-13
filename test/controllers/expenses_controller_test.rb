@@ -47,10 +47,17 @@ class ExpensesControllerTest < ActionController::TestCase
     assert_redirected_to({controller: :sessions, action: :login})
   end
 
-  test 'Authed user can get :edit' do
+  test 'Authed user can get :edit for his/her expense' do
     sign_in @user
     get :edit, id: @expense
     assert_response :success
+  end
+
+  test 'Authed user cannot get :edit for another user\s expense' do
+    sign_in @user
+    expense2 = expenses(:two)
+    get :edit, id: expense2
+    assert_redirected_to(controller: :dashboard)
   end
 
   test 'Anon user cannot get :edit' do

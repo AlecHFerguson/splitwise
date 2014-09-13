@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912000728) do
+ActiveRecord::Schema.define(version: 20140913194523) do
 
   create_table "expenses", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id_old"
     t.string   "name"
     t.text     "description"
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|

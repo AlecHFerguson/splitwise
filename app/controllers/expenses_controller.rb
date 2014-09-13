@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
   include ExpensesHelper, SessionsHelper
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :require_login
+  before_action :exclude_non_owner, only: [:edit, :update, :show, :destroy]
 
   def index
     redirect_to({controller: :dashboard})
@@ -63,4 +64,12 @@ class ExpensesController < ApplicationController
     def params_to_save
       expense_params.merge(user_id: current_user.id)
     end
+
+    def exclude_non_owner
+      expense = Expense.find_by_id(params[:id])
+      unless expense.user_id == current_user.id
+        redirect_to({controller: :dashboard})
+      end
+    end
+
 end
