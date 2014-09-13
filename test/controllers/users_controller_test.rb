@@ -21,7 +21,7 @@ class UsersControllerTest < ActionController::TestCase
   test 'unauthed user cannot get index' do
     get :index
     assert_response :redirect
-    assert_redirected_to 'http://test.host/login'
+    assert_redirected_to({controller: :sessions, action: :login})
   end
 
   test "Authed user should get new" do
@@ -51,7 +51,7 @@ class UsersControllerTest < ActionController::TestCase
                             password: @test_password, password_confirmation: @test_password }
     end
 
-    assert_redirected_to 'http://test.host/login'
+    assert_redirected_to({controller: :sessions, action: :login})
   end
 
   test 'invalid email => redirects to user' do
@@ -76,7 +76,7 @@ class UsersControllerTest < ActionController::TestCase
   test 'anon user cannot get edit' do
     get :edit, id: @user
     assert_response :redirect
-    assert_redirected_to 'http://test.host/login'
+    assert_redirected_to({controller: :sessions, action: :login})
   end
 
   test "should update user" do
@@ -91,7 +91,7 @@ class UsersControllerTest < ActionController::TestCase
     patch :update, id: @user.id, user: { email: @user.email, fname: @user.fname, 
               lname: @user.lname, password: @test_password + 'aaa', 
               password_confirmation: @test_password + 'aaa'  }
-    assert_redirected_to 'http://test.host/login'
+    assert_redirected_to({controller: :sessions, action: :login})
   end
 
   test 'authed user can destroy' do
@@ -108,6 +108,6 @@ class UsersControllerTest < ActionController::TestCase
       delete :destroy, id: @user
     end
 
-    assert_redirected_to 'http://test.host/login'
+    assert_redirected_to({controller: :sessions, action: :login})
   end
 end

@@ -2,12 +2,12 @@
 
 one:
   user_id: 1
-  name: MyString
-  description: MyText
-  amount: 9.99
+  name: Title1
+  description: description1
+  amount: 111.11
 
 two:
-  user_id: 1
-  name: MyString
-  description: MyText
-  amount: 9.99
+  user_id: 2
+  name: Title2
+  description: description2
+  amount: 222
