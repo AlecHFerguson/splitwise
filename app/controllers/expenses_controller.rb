@@ -1,6 +1,7 @@
 class ExpensesController < ApplicationController
   include ExpensesHelper, SessionsHelper
   before_action :require_login
+  before_action :set_tabs
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :exclude_non_owner, only: [:edit, :update, :show, :destroy]
 
@@ -55,6 +56,10 @@ class ExpensesController < ApplicationController
   private
     def set_expense
       @expense = Expense.find(params[:id])
+    end
+
+    def set_tabs
+      @tabs = Tab.where(user_id: current_user.id)
     end
 
     def expense_params
