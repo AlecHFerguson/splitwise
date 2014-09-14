@@ -1,8 +1,7 @@
 Splitwise::Application.routes.draw do
   resources :users
   resources :sessions, only: [:login, :create, :destroy]
-  resources :dashboard
-  resources :expenses
+  resources :dashboard, :expenses, :tabs
 
   match '/login',  to: 'sessions#login',   via: 'get'
   match '/create', to: 'sessions#create',  via: 'post'

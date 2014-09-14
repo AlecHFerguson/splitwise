@@ -3,4 +3,5 @@ module ExpensesHelper
   C_NAME        = :name
   C_AMOUNT      = :amount
   C_DESCRIPTION = :description
+  C_TAB_ID      = :tab_id
 end

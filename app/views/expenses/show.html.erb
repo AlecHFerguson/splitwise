@@ -15,6 +15,15 @@
   <%= @expense.description %>
 </p>
 
+<% if @expense.tab_id %>
+  <p>
+    <strong>Tab:</strong>
+    <%= @expense.tab_id %>
+  </p>
+<% else %>
+  <p><i>TODO: Add handling for no tab_id</i></p>
+<% end %>
+
 <%= link_to 'Edit', edit_expense_path(@expense) %>
 <%= link_to 'Delete', @expense, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Dashboard', {controller: :dashboard} %>

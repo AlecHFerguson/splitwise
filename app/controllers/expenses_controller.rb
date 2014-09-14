@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
   include ExpensesHelper, SessionsHelper
-  before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :require_login
+  before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :exclude_non_owner, only: [:edit, :update, :show, :destroy]
 
   def index
@@ -58,7 +58,7 @@ class ExpensesController < ApplicationController
     end
 
     def expense_params
-      params.require(:expense).permit(C_NAME, C_AMOUNT, C_DESCRIPTION)
+      params.require(:expense).permit(C_NAME, C_AMOUNT, C_DESCRIPTION, C_TAB_ID)
     end
 
     def params_to_save

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :expenses
+  has_many :tabs
   NAME_REGEX = /\A[A-Z][a-zA-Z]+\z/
 
   def User.gen_remember_token

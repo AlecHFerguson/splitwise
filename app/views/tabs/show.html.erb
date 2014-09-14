@@ -1,0 +1,30 @@
+<h1>Tab Details</h1>
+
+<p>
+  <strong>Tab Name:</strong>
+  <%= @tab.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tab.description %>
+</p>
+
+<p>
+  <strong>Expenses in this tab:</strong>
+  <% if @expenses %>
+    <ul>
+      <% @expenses.each do |expense| %>
+        <li><%= expense.name %>: <%= format_dollars(expense.amount) %></li>
+      <% end %>
+    </ul>
+    <div><strong>Total amount:</strong> <%= format_dollars(@total_amt) %></div>
+  <% else %>
+    <div>You have no expenses in this tab.<div>
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_expense_path(@tab) %>
+<%= link_to 'Delete', @tab, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Dashboard', {controller: :dashboard} %>
