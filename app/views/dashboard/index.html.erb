@@ -1,6 +1,31 @@
 <% provide(:title, 'Dashboard') %>
 <h1>Expenses Dashboard</h1>
 
+<h2>My Tabs</h2>
+<%= link_to 'Create a New Tab', new_tab_path %>
+<table>
+  <thead>
+    <tr class="row-titles">
+      <th>Name</th>
+      <th>Total Damages</th>
+    <tr>
+  </thead>
+
+  <% if @tabs && !@tabs.empty? %>
+    <tbody>
+      <% @tabs.each do |tab| %>
+        <tr>
+          <td><%= tab.name %></td>
+          <td><%= format_dollars(tab.total_amount) %></td>
+        </tr> 
+      <% end %>
+    </tbody>
+  <% else %>
+    <p>You have no tabs</p>
+  <% end %>
+</table>
+
+<h2>My Expenses</h2>
 <%= link_to 'Add a new expense', new_expense_path %>
 <table>
   <thead>

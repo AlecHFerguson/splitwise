@@ -7,9 +7,11 @@ module ExpensesHelper
 
   def tab_select_list_array
     tabs_array = []
-    @tabs.each do |tab|
-      tabs_array.push [tab.name, tab.id]
+    if @tabs
+      @tabs.each do |tab|
+        tabs_array.push [tab.name, tab.id]
+      end
+      options_for_select(tabs_array)
     end
-    options_for_select(tabs_array)
   end
 end

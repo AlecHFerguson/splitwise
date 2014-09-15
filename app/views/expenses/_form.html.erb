@@ -27,9 +27,14 @@
     <%= f.label :tab_id %>
     <%= f.text_field :tab_id %>
   </div>
-  <div class="select-list">
-    <%= f.select(:tab_id, tab_select_list_array) %>
-  </div>
+  <% if @tabs %>
+    <div class="select-list">
+      <%= f.select(:tab_id, tab_select_list_array) %>
+    </div>
+  <% else %>
+    <p>You have to active tabs to which you can add this expense. 
+        <%= link_to 'Create a new tab here', new_tab_path %>.</p>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
