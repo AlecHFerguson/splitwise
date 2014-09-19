@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  belongs_to :participant
   has_many :expenses
   has_many :tabs
   NAME_REGEX = /\A[A-Z][a-zA-Z]+\z/

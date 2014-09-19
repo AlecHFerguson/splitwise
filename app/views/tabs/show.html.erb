@@ -24,6 +24,17 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Users splitting this tab:</strong>
+  <% if @participants %>
+    <ul>
+      <% @participants.each do |participant| %>
+        <li><%= participant.fname + ' ' + participant.lname %></li>
+
+      <% end %>
+    </ul>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_expense_path(@tab) %>
 <%= link_to 'Delete', @tab, method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -19,7 +19,16 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
+  <% if @all_users %>
+    <h3>Select users to share the expenses in this tab:</h3>
+    <% @all_users.each do |user| %>
+      <%= check_box_tag "tab[splitters][]", "#{user.id}" %>
+    <% end %>
+  <% else %>
+    <p>Sorry, there are no users who can share your expenses. Invite some!</p>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

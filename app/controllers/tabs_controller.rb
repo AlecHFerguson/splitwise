@@ -9,14 +9,28 @@ class TabsController < ApplicationController
   end
 
   def new
+    @all_users = User.all
     @tab = Tab.new
   end
 
   def create
     @tab = Tab.new(params_to_save)
 
+    if @tab.save
+      success = true
+    else
+      success = false
+    end
+
+    if checkbox_values
+      checkbox_values.each do |value|
+        participant = Participant.new(tab_id: @tab.id, user_id: value.to_i)
+        participant.save
+      end
+    end
+
     respond_to do |format|
-      if @tab.save
+      if success
         format.html { redirect_to @tab, notice: 'Tab was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tab }
       else
@@ -24,6 +38,7 @@ class TabsController < ApplicationController
         format.json { render json: @tab.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   def edit
@@ -37,14 +52,20 @@ class TabsController < ApplicationController
       @expenses.each do |e|
         @total_amt += e.amount
       end
+
+      @participants = User.joins('INNER JOIN participants ON participants.user_id = users.id').where(participants: { tab_id: @tab.id })
     end
 
     def tab_params
-      params.require(:tab).permit(C_NAME, C_DESCRIPTION)
+      params.require(:tab).permit(C_NAME, C_DESCRIPTION, C_SPLITTERS => [])
     end
 
     def params_to_save
-      tab_params.merge(user_id: current_user.id)
+      tab_params.permit(C_NAME, C_DESCRIPTION).merge(user_id: current_user.id)
+    end
+
+    def checkbox_values
+      tab_params[C_SPLITTERS]
     end
 
     def exclude_non_owner
