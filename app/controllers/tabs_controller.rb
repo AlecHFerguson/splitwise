@@ -1,6 +1,7 @@
 class TabsController < ApplicationController
   include TabsHelper
   before_action :set_tab, only: [:show, :edit, :update, :destroy]
+  before_action :all_users, only: [:new, :edit]
   before_action :require_login
   before_action :exclude_non_owner, only: [:edit, :update, :show, :destroy]
 
@@ -9,36 +10,17 @@ class TabsController < ApplicationController
   end
 
   def new
-    @all_users = User.all
     @tab = Tab.new
   end
 
   def create
     @tab = Tab.new(params_to_save)
 
-    if @tab.save
-      success = true
-    else
-      success = false
-    end
+    save_tab
+  end
 
-    if checkbox_values
-      checkbox_values.each do |value|
-        participant = Participant.new(tab_id: @tab.id, user_id: value.to_i)
-        participant.save
-      end
-    end
-
-    respond_to do |format|
-      if success
-        format.html { redirect_to @tab, notice: 'Tab was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @tab }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @tab.errors, status: :unprocessable_entity }
-      end
-    end
-    
+  def update
+    save_tab('updated')
   end
 
   def edit
@@ -54,6 +36,10 @@ class TabsController < ApplicationController
       end
 
       @participants = User.joins('INNER JOIN participants ON participants.user_id = users.id').where(participants: { tab_id: @tab.id })
+    end
+
+    def all_users
+      @all_users = User.all
     end
 
     def tab_params
@@ -72,6 +58,31 @@ class TabsController < ApplicationController
       tab = Tab.find_by_id(params[:id])
       unless tab.user_id == current_user.id
         redirect_to({controller: :dashboard})
+      end
+    end
+
+    def save_tab(notice_status = 'created')
+      if @tab.save
+        success = true
+      else
+        success = false
+      end
+
+      if checkbox_values
+        checkbox_values.each do |value|
+          participant = Participant.new(tab_id: @tab.id, user_id: value.to_i)
+          participant.save
+        end
+      end
+
+      respond_to do |format|
+        if success
+          format.html { redirect_to @tab, notice: "Tab was successfully #{notice_status}." }
+          format.json { render action: 'show', status: :created, location: @tab }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @tab.errors, status: :unprocessable_entity }
+        end
       end
     end
 end

@@ -13,7 +13,7 @@
  */
 header {
   background-color: #d3360b;
-  height: 70px;
+  height: 90px;
   position: relative;
 }
 
@@ -31,7 +31,7 @@ a {
 
 .nav {
   display: block;
-  transform: translateY(16%);
+  transform: translateY(28%);
 }
 
 .user-name {

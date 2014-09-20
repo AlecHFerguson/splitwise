@@ -36,6 +36,6 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_expense_path(@tab) %>
+<%= link_to 'Edit', edit_tab_path(@tab) %>
 <%= link_to 'Delete', @tab, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Dashboard', {controller: :dashboard} %>
