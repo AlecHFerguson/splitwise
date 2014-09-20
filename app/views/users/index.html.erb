@@ -1,4 +1,4 @@
-<h1>Listing users</h1>
+<div class="page-title">Listing users</div>
 
 <table>
   <thead>
@@ -6,8 +6,6 @@
       <th>Fname</th>
       <th>Lname</th>
       <th>Email</th>
-      <th>Password</th>
-      <th>Salt</th>
       <th></th>
       <th></th>
       <th></th>
@@ -20,17 +18,11 @@
         <td><%= user.fname %></td>
         <td><%= user.lname %></td>
         <td><%= user.email %></td>
-        <td><%= truncate(user.password, length: 21) %></td>
-        <td><%= user.salt %></td>
         
         <% if signed_in? %>
           <td><%= link_to 'Show', user %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
           <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td><del>Show</del></td>
-          <td><del>Edit</del></td>
-          <td><del>Destroy</del></td>
         <% end %>
         
       </tr>
