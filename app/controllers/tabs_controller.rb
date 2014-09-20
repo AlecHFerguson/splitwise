@@ -70,8 +70,11 @@ class TabsController < ApplicationController
 
       if checkbox_values
         checkbox_values.each do |value|
-          participant = Participant.new(tab_id: @tab.id, user_id: value.to_i)
-          participant.save
+          already_in_db = Participant.where(tab_id: @tab_id, user_id: value.to_i)
+          if already_in_db.count == 0
+            participant = Participant.new(tab_id: @tab.id, user_id: value.to_i)
+            participant.save
+          end
         end
       end
 
