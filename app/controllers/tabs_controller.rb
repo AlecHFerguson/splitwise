@@ -26,6 +26,16 @@ class TabsController < ApplicationController
   def edit
   end
 
+  # DELETE /tabs/1
+  # DELETE /tabs/1.json
+  def destroy
+    @tab.destroy
+    respond_to do |format|
+      format.html { redirect_to '/dashboard' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def set_tab
       @tab = Tab.find(params[:id])

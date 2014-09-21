@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { in: 3..50 }
   has_secure_password
 
+  def full_name
+    fname + ' ' + lname
+  end
+
   private
     def create_remember_token
       self.remember_token = User.hash_token(User.gen_remember_token)

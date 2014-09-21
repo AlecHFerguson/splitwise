@@ -4,27 +4,39 @@
 <div class="spaces tabs-space">
   <h2>My Tabs</h2>
   <%= link_to 'Create a New Tab', new_tab_path %>
-  <table>
-    <thead>
-      <tr class="row-titles">
-        <th>Name</th>
-        <th>Total Damages</th>
-      <tr>
-    </thead>
-
-    <% if @tabs && !@tabs.empty? %>
-      <tbody>
-        <% @tabs.each do |tab| %>
-          <tr>
-            <td><%= link_to tab.name, tab %></td>
-            <td><%= format_dollars(tab.total_amount) %></td>
-          </tr> 
-        <% end %>
-      </tbody>
-    <% else %>
-      <p>You have no tabs</p>
+  <% if @tabs && !@tabs.empty? %>
+    <% @tabs.each do |tab| %>
+      <div class="tab-block">
+        <div class="tab-head">
+          <div class="block tab-name"><%= link_to tab.name, tab %></div>
+          <div class="block amount"><%= format_dollars(tab.total_amount) %></div>
+        </div>
+        <div class="block tab-expenses">
+          <% if tab.this_tabs_expenses && tab.this_tabs_expenses.length > 0 %>
+            <% tab.this_tabs_expenses.each do |e| %>
+              <div class="expense-block">
+                <div class="block expense-name"><%= link_to e.name, e %></div>
+                <div class="block expense-amt"><%= format_dollars(e.amount) %></div>
+              </div>
+            <% end %>
+          <% else %>
+            <p>This tab has no expenses.</p>
+          <% end %>
+        </div>
+        <div class="block tab-users">
+          <% if tab.this_tabs_users && tab.this_tabs_users.length > 0 %>
+            <ul>
+              <% tab.this_tabs_users.each do |user| %>
+                <li class="tab-user-name"><%= user.full_name %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </table>
+  <% else %>
+    <div>No tabs found</div>
+  <% end %>
 </div>
 
 <div class="spaces expenses-space">
