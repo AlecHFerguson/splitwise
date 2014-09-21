@@ -12,6 +12,7 @@
       <%= link_to 'Splitwise', '/dashboard', { class: 'block logo'} %>
       <% if signed_in? %>
         <li class="block user-name">Welcome, <%= current_user.fname %> <%= current_user.lname %></li>
+        <li class="nav-button"></li>
         <li class="block logout-pad"><%= link_to 'Logout', '/logout', { method: :delete, class: 'logout-btn'} %></li>
       <% else %>
        <%= link_to 'Login', '/login', {method: :get, class: 'logout-btn'} %>
