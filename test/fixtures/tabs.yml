@@ -4,7 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: 
+one:
+  id: 1
   name: 'Test Tab Name'
   description: 'Test tab description'
   user_id: 1
+two:
+  id: 2
+  name: 'Second Name'
+  description: 'Second description'
+  user_id: 2

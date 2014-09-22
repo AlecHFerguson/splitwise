@@ -1,8 +1,8 @@
 class TabsController < ApplicationController
   include TabsHelper
+  before_action :require_login
   before_action :set_tab, only: [:show, :edit, :update, :destroy]
   before_action :all_users, only: [:new, :edit]
-  before_action :require_login
   before_action :exclude_non_owner, only: [:edit, :update, :show, :destroy]
 
   def index
@@ -15,12 +15,13 @@ class TabsController < ApplicationController
 
   def create
     @tab = Tab.new(params_to_save)
-
-    save_tab
+    success = @tab.save ? true : false
+    save_tab(success)
   end
 
   def update
-    save_tab('updated')
+    success = @tab.update(params_to_save) ? true : false
+    save_tab(success, 'updated')
   end
 
   def edit
@@ -71,13 +72,9 @@ class TabsController < ApplicationController
       end
     end
 
-    def save_tab(notice_status = 'created')
-      if @tab.save
-        success = true
-      else
-        success = false
-      end
-
+    # @param [TrueClass, FalseClass] success Whether the save or update was successful
+    # @param [String] notice_status Use to create success message
+    def save_tab(success, notice_status = 'created')
       if checkbox_values
         checkbox_values.each do |value|
           already_in_db = Participant.where(tab_id: @tab_id, user_id: value.to_i)

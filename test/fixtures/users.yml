@@ -9,13 +9,23 @@ one:
   password_digest: <%= BCrypt::Password.create('testing1') %>
 
 two:
-  fname: MyString
-  lname: MyString
-  email: MyString
-  password: MyString
+  id: 2
+  fname: Seconder
+  lname: McLastname
+  email: second@myurl.com
+  password: testing1
+  password_digest: <%= BCrypt::Password.create('testing1') %>
+
+three:
+  id: 3
+  fname: Tres
+  lname: Tester
+  email: tercera@myurl.com
+  password: testing1
+  password_digest: <%= BCrypt::Password.create('testing1') %>
 
 authed:
-  fname: Authed
+  fname: Third
   lname: User
   email: authed@auth.com
   password: testing1
