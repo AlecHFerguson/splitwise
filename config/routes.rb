@@ -4,6 +4,7 @@ Splitwise::Application.routes.draw do
   resources :dashboard, :expenses, :tabs
 
   match '/login',  to: 'sessions#login',   via: 'get'
+  match '/logon',  to: 'sessions#login',   via: 'get'
   match '/create', to: 'sessions#create',  via: 'post'
   match '/logout', to: 'sessions#destroy', via: 'delete'
 

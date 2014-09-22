@@ -1,7 +1,13 @@
 class SessionsController < ApplicationController
 
+  def index
+    redirect_to :login
+  end
+
   def login
-    render 'login'
+    if current_user
+      redirect_to({controller: :dashboard})
+    end
   end
 
   def create
